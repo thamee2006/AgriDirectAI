@@ -1,0 +1,388 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AgriDirect AI | Smart Agricultural Marketplace</title>
+
+    <link rel="stylesheet" href="{% static 'marketplace/style.css' %}">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav>
+
+    <div class="logo">
+        🌾 AgriDirect AI
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+
+        <a href="/farmer/">Farmer</a>
+
+        <a href="/buyer/">Buyer</a>
+
+        {% if user.is_authenticated %}
+
+            <a href="/orders/">My Orders</a>
+
+            <a href="/logout/">Logout</a>
+
+        {% else %}
+
+            <a href="/login/">Login</a>
+
+            <a href="/register/">Register</a>
+
+        {% endif %}
+
+    </div>
+
+</nav>
+
+
+<!-- ================= HERO SECTION ================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="hero-badge">
+            🌱 AI-Powered Agriculture Platform
+        </div>
+
+        <h1>
+            From Farm to Market,
+            <span>Directly.</span>
+        </h1>
+
+        <p>
+            AgriDirect AI connects farmers and FPOs directly
+            with consumers and bulk buyers using Artificial
+            Intelligence, fair pricing, demand forecasting
+            and smart logistics.
+        </p>
+
+
+        <div class="buttons">
+
+            <a href="/farmer/" class="btn primary">
+                👨‍🌾 Start as Farmer
+            </a>
+
+            <a href="/buyer/" class="btn secondary">
+                🛒 Explore Marketplace
+            </a>
+
+        </div>
+
+
+        <div class="hero-stats">
+
+            <div>
+                <strong>AI</strong>
+                <small>Powered</small>
+            </div>
+
+            <div>
+                <strong>Direct</strong>
+                <small>Farmer-Buyer</small>
+            </div>
+
+            <div>
+                <strong>Smart</strong>
+                <small>Logistics</small>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section class="about">
+
+    <div class="about-content">
+
+        <h2>
+            🌾 Building a Smarter Agricultural Marketplace
+        </h2>
+
+        <p>
+            Traditional agricultural supply chains often involve
+            multiple intermediaries. AgriDirect AI creates a digital
+            platform where farmers can showcase their crops and
+            buyers can directly discover and purchase them.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= AI FEATURES ================= -->
+
+<section class="features">
+
+    <h2>
+        🤖 Intelligent Features
+    </h2>
+
+    <p class="section-subtitle">
+        AI-powered tools designed to make agricultural
+        trading smarter and more efficient.
+    </p>
+
+
+    <div class="feature-grid">
+
+
+        <!-- Demand Forecast -->
+
+        <div class="card">
+
+            <div class="icon">
+                📈
+            </div>
+
+            <h3>
+                Demand Forecasting
+            </h3>
+
+            <p>
+                Analyze crop demand and estimate future
+                market requirements using AI.
+            </p>
+
+            <a href="/demand-forecast/" class="btn primary">
+                View Forecast →
+            </a>
+
+        </div>
+
+
+        <!-- Fair Price -->
+
+        <div class="card">
+
+            <div class="icon">
+                💰
+            </div>
+
+            <h3>
+                AI Fair Price
+            </h3>
+
+            <p>
+                Get intelligent price recommendations
+                to help farmers make better selling decisions.
+            </p>
+
+            <a href="/fair-price/" class="btn primary">
+                Check Price →
+            </a>
+
+        </div>
+
+
+        <!-- Smart Matching -->
+
+        <div class="card">
+
+            <div class="icon">
+                🤝
+            </div>
+
+            <h3>
+                Smart Matching
+            </h3>
+
+            <p>
+                Match farmers with suitable consumers
+                and bulk buyers based on crop requirements.
+            </p>
+
+            <a href="/smart-matching/" class="btn primary">
+                Find Matches →
+            </a>
+
+        </div>
+
+
+        <!-- Logistics -->
+
+        <div class="card">
+
+            <div class="icon">
+                🚚
+            </div>
+
+            <h3>
+                Smart Logistics
+            </h3>
+
+            <p>
+                Improve transportation planning with
+                intelligent delivery and route optimization.
+            </p>
+
+            <a href="/logistics/" class="btn primary">
+                View Logistics →
+            </a>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- ================= HOW IT WORKS ================= -->
+
+<section class="how-it-works">
+
+    <h2>
+        ⚡ How AgriDirect AI Works
+    </h2>
+
+
+    <div class="steps">
+
+        <div class="step">
+
+            <div class="step-number">
+                01
+            </div>
+
+            <h3>
+                👨‍🌾 Farmer Lists Crop
+            </h3>
+
+            <p>
+                Farmers add crop details,
+                quantity, price and location.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                02
+            </div>
+
+            <h3>
+                🤖 AI Analyzes
+            </h3>
+
+            <p>
+                AI analyzes price, demand
+                and buyer requirements.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                03
+            </div>
+
+            <h3>
+                🤝 Smart Matching
+            </h3>
+
+            <p>
+                Suitable farmers and buyers
+                are connected directly.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                04
+            </div>
+
+            <h3>
+                🚚 Delivery
+            </h3>
+
+            <p>
+                Smart logistics helps manage
+                the delivery process.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CTA ================= -->
+
+<section class="cta">
+
+    <h2>
+        🌱 Ready to Transform Agriculture?
+    </h2>
+
+    <p>
+        Connect directly. Trade smarter. Grow together.
+    </p>
+
+    <div class="buttons">
+
+        <a href="/register/" class="btn primary">
+            Create Account
+        </a>
+
+        <a href="/buyer/" class="btn secondary">
+            Explore Crops
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="logo">
+        🌾 AgriDirect AI
+    </div>
+
+    <p>
+        AI-powered digital marketplace connecting
+        farmers directly with buyers.
+    </p>
+
+    <p class="copyright">
+        © 2026 AgriDirect AI | Smart Agriculture Platform
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

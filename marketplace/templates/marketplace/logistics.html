@@ -1,0 +1,358 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Logistics - AgriDirect AI</title>
+
+    <link rel="stylesheet"
+          href="{% static 'marketplace/style.css' %}">
+
+    <style>
+
+        .logistics-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .logistics-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .logistics-header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .logistics-header p {
+            color: #666;
+            font-size: 17px;
+        }
+
+        .logistics-grid {
+            display: grid;
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(300px, 1fr)
+            );
+            gap: 25px;
+        }
+
+        .logistics-card {
+            background: white;
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+
+        .logistics-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .crop-image {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+            border-radius: 14px;
+            margin-bottom: 18px;
+        }
+
+        .logistics-card h2 {
+            margin-bottom: 15px;
+        }
+
+        .logistics-info {
+            display: grid;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 10px;
+            background: #f7f9f7;
+            border-radius: 8px;
+        }
+
+        .info-label {
+            font-weight: 600;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .delivery-box {
+            background: #f1f8e9;
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 15px;
+        }
+
+        .delivery-box h3 {
+            margin-bottom: 8px;
+        }
+
+        .empty-logistics {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+        }
+
+        .empty-logistics .icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 600px) {
+
+            .logistics-container {
+                padding: 15px;
+            }
+
+            .logistics-header h1 {
+                font-size: 28px;
+            }
+
+            .info-row {
+                flex-direction: column;
+                gap: 4px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <div class="logo">
+            🌾 AgriDirect AI
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">Home</a>
+
+            <a href="/farmer/">Farmer</a>
+
+            <a href="/buyer/">Marketplace</a>
+
+            <a href="/orders/">My Orders</a>
+
+            <a href="/logistics/">Logistics</a>
+
+            <a href="/logout/">Logout</a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- MAIN -->
+
+    <div class="logistics-container">
+
+        <div class="logistics-header">
+
+            <h1>
+                🚚 Smart Logistics
+            </h1>
+
+            <p>
+                AI-powered delivery planning for
+                faster and smarter agricultural transportation.
+            </p>
+
+        </div>
+
+
+        {% if orders %}
+
+        <div class="logistics-grid">
+
+            {% for order in orders %}
+
+            <div class="logistics-card">
+
+
+                <!-- CROP IMAGE -->
+
+                <img
+                    src="{% static 'marketplace/images/' %}{{ order.crop.image_filename }}"
+                    alt="{{ order.crop.crop_name }}"
+                    class="crop-image"
+                >
+
+
+                <!-- CROP NAME -->
+
+                <h2>
+                    🌱 {{ order.crop.crop_name }}
+                </h2>
+
+
+                <!-- ORDER INFORMATION -->
+
+                <div class="logistics-info">
+
+                    <div class="info-row">
+
+                        <span class="info-label">
+                            Order ID
+                        </span>
+
+                        <span>
+                            #{{ order.id }}
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="info-label">
+                            Quantity
+                        </span>
+
+                        <span>
+                            {{ order.quantity }} kg
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="info-label">
+                            Location
+                        </span>
+
+                        <span>
+                            {{ order.crop.location }}
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="info-label">
+                            Total Price
+                        </span>
+
+                        <span>
+                            ₹{{ order.total_price }}
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="info-label">
+                            Order Status
+                        </span>
+
+                        <span class="status">
+                            {{ order.status }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DELIVERY INFORMATION -->
+
+                <div class="delivery-box">
+
+                    <h3>
+                        📍 Delivery Plan
+                    </h3>
+
+                    <p>
+                        <strong>Estimated Distance:</strong>
+                        {{ order.distance }} km
+                    </p>
+
+                    <p>
+                        <strong>Estimated Delivery:</strong>
+                        {{ order.delivery_time }}
+                    </p>
+
+                </div>
+
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        {% else %}
+
+        <!-- NO ORDERS -->
+
+        <div class="empty-logistics">
+
+            <div class="icon">
+                🚚
+            </div>
+
+            <h2>
+                No Orders Available
+            </h2>
+
+            <p>
+                Your logistics information will appear
+                here after an order is placed.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            🌾 AgriDirect AI
+            | Smart Agricultural Marketplace
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

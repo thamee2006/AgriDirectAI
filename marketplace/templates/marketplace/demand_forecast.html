@@ -1,0 +1,343 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Demand Forecast - AgriDirect AI</title>
+
+    <link rel="stylesheet"
+          href="{% static 'marketplace/style.css' %}">
+
+    <style>
+
+        .forecast-header {
+            text-align: center;
+            padding: 45px 20px 25px;
+        }
+
+        .forecast-header h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .forecast-header p {
+            color: #666;
+            font-size: 17px;
+        }
+
+        .forecast-grid {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto auto 60px;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .forecast-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+
+            border: 1px solid #e8eee8;
+
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+
+            transition: 0.3s;
+        }
+
+        .forecast-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+
+        .crop-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .forecast-content {
+            padding: 22px;
+        }
+
+        .forecast-content h2 {
+            margin-top: 0;
+            font-size: 26px;
+        }
+
+        .crop-info p {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .demand-box {
+            margin-top: 20px;
+            padding: 18px;
+            border-radius: 12px;
+            background: #eef8f0;
+            text-align: center;
+        }
+
+        .demand-box h3 {
+            margin: 0 0 10px;
+        }
+
+        .demand-level {
+            font-size: 28px;
+            font-weight: bold;
+            color: #21863d;
+        }
+
+        .forecast-box {
+            margin-top: 18px;
+            padding: 15px;
+            background: #f5f8f5;
+            border-radius: 10px;
+        }
+
+        .forecast-box h3 {
+            margin-top: 0;
+        }
+
+        .empty-message {
+            text-align: center;
+            width: 100%;
+            padding: 40px;
+        }
+
+        @media (max-width: 900px) {
+
+            .forecast-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .forecast-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .forecast-header h1 {
+                font-size: 30px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <div class="logo">
+        🌾 AgriDirect AI
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+
+        <a href="/farmer/">Farmer</a>
+
+        <a href="/buyer/">Buyer</a>
+
+        <a href="/orders/">My Orders</a>
+
+        <a href="/logout/">Logout</a>
+
+    </div>
+
+</nav>
+
+
+<!-- HEADER -->
+
+<section class="forecast-header">
+
+    <h1>
+        📈 AI Demand Forecast
+    </h1>
+
+    <p>
+        Predict future demand for your crops using AI.
+    </p>
+
+</section>
+
+
+<!-- FORECAST CARDS -->
+
+<div class="forecast-grid">
+
+    {% for crop in crops %}
+
+    <div class="forecast-card">
+
+
+        <!-- CROP IMAGE -->
+
+        <img
+            src="{% static 'marketplace/images/' %}{{ crop.image_filename }}"
+            alt="{{ crop.crop_name }}"
+            class="crop-image">
+
+
+        <!-- CROP DETAILS -->
+
+        <div class="forecast-content">
+
+            <h2>
+                🌱 {{ crop.crop_name }}
+            </h2>
+
+            <div class="crop-info">
+
+                <p>
+                    👨‍🌾 <strong>Farmer:</strong>
+                    {{ crop.farmer_name }}
+                </p>
+
+                <p>
+                    📦 <strong>Available Quantity:</strong>
+                    {{ crop.quantity }} kg
+                </p>
+
+                <p>
+                    📍 <strong>Location:</strong>
+                    {{ crop.location }}
+                </p>
+
+            </div>
+
+
+            <!-- DEMAND LEVEL -->
+
+            <div class="demand-box">
+
+                <h3>
+                    🤖 Predicted Demand Level
+                </h3>
+
+                <div class="demand-level">
+                    {{ crop.demand_level }}
+                </div>
+
+            </div>
+
+
+            {% if crop.demand_level == "High" %}
+
+                <p>
+                    🔥 <strong>High demand expected.</strong>
+                    Farmers can consider increasing
+                    production and supply.
+                </p>
+
+            {% elif crop.demand_level == "Medium" %}
+
+                <p>
+                    📊 <strong>Moderate demand expected.</strong>
+                    Maintain a balanced supply.
+                </p>
+
+            {% else %}
+
+                <p>
+                    📉 <strong>Low demand currently.</strong>
+                    Better marketing may help increase sales.
+                </p>
+
+            {% endif %}
+
+
+            <!-- AI FORECAST -->
+
+            <div class="forecast-box">
+
+                <h3>
+                    🔮 AI Forecast
+                </h3>
+
+                <p>
+                    {{ crop.forecast_message }}
+                </p>
+
+            </div>
+
+
+            <p>
+                🧠 <strong>AI Analysis</strong>
+            </p>
+
+            <p>
+                The system analyzes available crop
+                quantity to estimate the expected
+                demand level and provide a future
+                demand indication.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    {% empty %}
+
+    <div class="empty-message">
+
+        <h3>
+            🌱 No Crop Data Available
+        </h3>
+
+        <p>
+            Farmers have not listed any crops yet.
+        </p>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="logo">
+        🌾 AgriDirect AI
+    </div>
+
+    <p>
+        AI-powered digital marketplace connecting
+        farmers directly with buyers.
+    </p>
+
+    <p class="copyright">
+        © 2026 AgriDirect AI | Smart Agriculture Platform
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

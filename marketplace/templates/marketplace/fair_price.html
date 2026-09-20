@@ -1,0 +1,295 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AI Fair Price - AgriDirect AI</title>
+
+    <link rel="stylesheet"
+          href="{% static 'marketplace/style.css' %}">
+
+    <style>
+
+        .price-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .price-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .price-header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .price-header p {
+            color: #666;
+            font-size: 17px;
+        }
+
+        .price-grid {
+            display: grid;
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(300px, 1fr)
+            );
+            gap: 25px;
+        }
+
+        .price-card {
+            background: white;
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+
+        .price-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .crop-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 14px;
+            margin-bottom: 18px;
+        }
+
+        .price-card h2 {
+            margin-bottom: 15px;
+        }
+
+        .price-info {
+            display: grid;
+            gap: 10px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background: #f7f9f7;
+            border-radius: 8px;
+        }
+
+        .price-row strong {
+            font-weight: 600;
+        }
+
+        .recommended {
+            margin-top: 15px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .recommended h3 {
+            margin-bottom: 5px;
+        }
+
+        .recommended-price {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .empty-price {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 18px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <div class="logo">
+            🌾 AgriDirect AI
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">Home</a>
+
+            <a href="/farmer/">Farmer</a>
+
+            <a href="/buyer/">Marketplace</a>
+
+            <a href="/orders/">My Orders</a>
+
+            <a href="/fair-price/">AI Fair Price</a>
+
+            <a href="/logout/">Logout</a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- MAIN -->
+
+    <div class="price-container">
+
+        <div class="price-header">
+
+            <h1>
+                💰 AI Fair Price Prediction
+            </h1>
+
+            <p>
+                Get an estimated fair selling price
+                for your crops using AI-based analysis.
+            </p>
+
+        </div>
+
+
+        {% if crops %}
+
+        <div class="price-grid">
+
+            {% for crop in crops %}
+
+            <div class="price-card">
+
+                <!-- CROP IMAGE -->
+
+                <img
+                    src="{% static 'marketplace/images/' %}{{ crop.image_filename }}"
+                    alt="{{ crop.crop_name }}"
+                    class="crop-image"
+                >
+
+
+                <!-- CROP NAME -->
+
+                <h2>
+                    🌱 {{ crop.crop_name }}
+                </h2>
+
+
+                <div class="price-info">
+
+                    <div class="price-row">
+
+                        <strong>Farmer</strong>
+
+                        <span>
+                            {{ crop.farmer_name }}
+                        </span>
+
+                    </div>
+
+
+                    <div class="price-row">
+
+                        <strong>Quantity</strong>
+
+                        <span>
+                            {{ crop.quantity }} kg
+                        </span>
+
+                    </div>
+
+
+                    <div class="price-row">
+
+                        <strong>Location</strong>
+
+                        <span>
+                            {{ crop.location }}
+                        </span>
+
+                    </div>
+
+
+                    <div class="price-row">
+
+                        <strong>Current Price</strong>
+
+                        <span>
+                            ₹{{ crop.price }}/kg
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- AI PRICE -->
+
+                <div class="recommended">
+
+                    <h3>
+                        🤖 AI Recommended Price
+                    </h3>
+
+                    <div class="recommended-price">
+
+                        ₹{{ crop.recommended_price }}/kg
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        {% else %}
+
+        <div class="empty-price">
+
+            <h2>
+                🌱 No Crops Available
+            </h2>
+
+            <p>
+                Add crops from the Farmer Dashboard
+                to get AI fair price predictions.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            🌾 AgriDirect AI
+            | Smart Agricultural Marketplace
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,305 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Buyer Marketplace - AgriDirect AI</title>
+
+    <link rel="stylesheet"
+          href="{% static 'marketplace/style.css' %}">
+
+    <style>
+
+        .market-header {
+            text-align: center;
+            padding: 45px 20px 25px;
+        }
+
+        .market-header h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .market-header p {
+            color: #666;
+            font-size: 17px;
+        }
+
+        .matching-button {
+            text-align: center;
+            margin: 20px 0 35px;
+        }
+
+        .market-grid {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto auto 60px;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .market-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+
+            border: 1px solid #e8eee8;
+
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+
+            transition: 0.3s;
+        }
+
+        .market-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+
+        .crop-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .market-content {
+            padding: 22px;
+        }
+
+        .market-content h2 {
+            margin-top: 0;
+            font-size: 26px;
+        }
+
+        .crop-info p {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .price {
+            font-size: 22px;
+            font-weight: bold;
+            color: #21863d;
+        }
+
+        .buy-button {
+            display: block;
+            text-align: center;
+            margin-top: 18px;
+        }
+
+        .empty-message {
+            text-align: center;
+            width: 100%;
+            padding: 40px;
+        }
+
+        @media (max-width: 900px) {
+
+            .market-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .market-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .market-header h1 {
+                font-size: 30px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <div class="logo">
+        🌾 AgriDirect AI
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+
+        <a href="/farmer/">Farmer</a>
+
+        <a href="/buyer/">Buyer</a>
+
+        <a href="/orders/">My Orders</a>
+
+        <a href="/logout/">Logout</a>
+
+    </div>
+
+</nav>
+
+
+<!-- HEADER -->
+
+<section class="market-header">
+
+    <h1>
+        🛒 Buyer Marketplace
+    </h1>
+
+    <p>
+        Find fresh crops directly from farmers.
+    </p>
+
+</section>
+
+
+<!-- SMART MATCHING -->
+
+<div class="matching-button">
+
+    <a href="/smart-matching/"
+       class="btn primary">
+
+        🤝 Smart Matching
+
+    </a>
+
+</div>
+
+
+<!-- CROP MARKETPLACE -->
+
+<div class="market-grid">
+
+    {% for crop in crops %}
+
+    <div class="market-card">
+
+
+        <!-- CROP IMAGE -->
+
+        <img
+            src="{% static 'marketplace/images/' %}{{ crop.image_filename }}"
+            alt="{{ crop.crop_name }}"
+            class="crop-image">
+
+
+        <!-- CROP DETAILS -->
+
+        <div class="market-content">
+
+            <h2>
+                🌱 {{ crop.crop_name }}
+            </h2>
+
+
+            <div class="crop-info">
+
+                <p>
+                    👨‍🌾 <strong>Farmer:</strong>
+                    {{ crop.farmer_name }}
+                </p>
+
+                <p>
+                    📦 <strong>Available:</strong>
+                    {{ crop.quantity }} kg
+                </p>
+
+                <p class="price">
+                    💰 ₹{{ crop.price }}/kg
+                </p>
+
+                <p>
+                    📍 <strong>Location:</strong>
+                    {{ crop.location }}
+                </p>
+
+                {% if crop.description %}
+
+                    <p>
+                        📝 {{ crop.description }}
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- BUY BUTTON -->
+
+            <div class="buy-button">
+
+                <a href="/buy/{{ crop.id }}/"
+                   class="btn primary">
+
+                    🛒 Buy Now
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    {% empty %}
+
+    <div class="empty-message">
+
+        <h3>
+            🌱 No Crops Available
+        </h3>
+
+        <p>
+            Farmers have not listed any crops yet.
+        </p>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="logo">
+        🌾 AgriDirect AI
+    </div>
+
+    <p>
+        AI-powered digital marketplace connecting
+        farmers directly with buyers.
+    </p>
+
+    <p class="copyright">
+        © 2026 AgriDirect AI | Smart Agriculture Platform
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

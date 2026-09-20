@@ -1,0 +1,377 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Orders - AgriDirect AI</title>
+
+    <link rel="stylesheet"
+          href="{% static 'marketplace/style.css' %}">
+
+    <style>
+
+        .orders-header {
+            text-align: center;
+            padding: 45px 20px 25px;
+        }
+
+        .orders-header h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .orders-header p {
+            color: #666;
+            font-size: 17px;
+        }
+
+        .orders-grid {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto auto 60px;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .order-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+
+            border: 1px solid #e8eee8;
+
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+
+            transition: 0.3s;
+        }
+
+        .order-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+
+        .crop-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .order-content {
+            padding: 22px;
+        }
+
+        .order-content h2 {
+            margin-top: 0;
+            font-size: 26px;
+        }
+
+        .order-info p {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .total-price {
+            font-size: 22px;
+            font-weight: bold;
+            color: #21863d;
+        }
+
+        .status-box {
+            margin-top: 18px;
+            padding: 15px;
+            background: #eef8f0;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .status-box h3 {
+            margin: 0 0 8px;
+        }
+
+        .status {
+            font-size: 20px;
+            font-weight: bold;
+            color: #21863d;
+        }
+
+        .status-form {
+            margin-top: 15px;
+        }
+
+        .status-form select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .status-form button {
+            width: 100%;
+            padding: 11px;
+            border: none;
+            border-radius: 8px;
+            background: #21863d;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .empty-message {
+            text-align: center;
+            width: 100%;
+            padding: 50px;
+        }
+
+        @media (max-width: 900px) {
+
+            .orders-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .orders-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .orders-header h1 {
+                font-size: 30px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <div class="logo">
+        🌾 AgriDirect AI
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+
+        <a href="/farmer/">Farmer</a>
+
+        <a href="/buyer/">Buyer</a>
+
+        <a href="/orders/">My Orders</a>
+
+        <a href="/logout/">Logout</a>
+
+    </div>
+
+</nav>
+
+
+<!-- HEADER -->
+
+<section class="orders-header">
+
+    <h1>
+        📦 My Orders
+    </h1>
+
+    <p>
+        Track your agricultural orders and delivery status.
+    </p>
+
+</section>
+
+
+<!-- ORDERS -->
+
+<div class="orders-grid">
+
+    {% for order in orders %}
+
+    <div class="order-card">
+
+
+        <!-- CROP IMAGE -->
+
+        <img
+            src="{% static 'marketplace/images/' %}{{ order.crop.image_filename }}"
+            alt="{{ order.crop.crop_name }}"
+            class="crop-image">
+
+
+        <!-- ORDER DETAILS -->
+
+        <div class="order-content">
+
+            <h2>
+                🌱 {{ order.crop.crop_name }}
+            </h2>
+
+
+            <div class="order-info">
+
+                <p>
+                    👨‍🌾 <strong>Farmer:</strong>
+                    {{ order.crop.farmer_name }}
+                </p>
+
+                <p>
+                    👤 <strong>Buyer:</strong>
+                    {{ order.buyer_name }}
+                </p>
+
+                <p>
+                    📦 <strong>Quantity:</strong>
+                    {{ order.quantity }} kg
+                </p>
+
+                <p class="total-price">
+                    💰 Total: ₹{{ order.total_price }}
+                </p>
+
+                <p>
+                    📍 <strong>Location:</strong>
+                    {{ order.crop.location }}
+                </p>
+
+                <p>
+                    📅 <strong>Order Date:</strong>
+                    {{ order.created_at|date:"d M Y, h:i A" }}
+                </p>
+
+            </div>
+
+
+            <!-- ORDER STATUS -->
+
+            <div class="status-box">
+
+                <h3>
+                    🚚 Order Status
+                </h3>
+
+                <div class="status">
+                    {{ order.status }}
+                </div>
+
+            </div>
+
+
+            <!-- FARMER STATUS UPDATE -->
+
+            {% if request.session.role == "farmer" %}
+
+            <form method="POST"
+                  action="/update-order-status/{{ order.id }}/"
+                  class="status-form">
+
+                {% csrf_token %}
+
+                <select name="status">
+
+                    <option value="Pending"
+                        {% if order.status == "Pending" %}selected{% endif %}>
+                        Pending
+                    </option>
+
+                    <option value="Confirmed"
+                        {% if order.status == "Confirmed" %}selected{% endif %}>
+                        Confirmed
+                    </option>
+
+                    <option value="Shipped"
+                        {% if order.status == "Shipped" %}selected{% endif %}>
+                        Shipped
+                    </option>
+
+                    <option value="Delivered"
+                        {% if order.status == "Delivered" %}selected{% endif %}>
+                        Delivered
+                    </option>
+
+                </select>
+
+                <button type="submit">
+                    🔄 Update Status
+                </button>
+
+            </form>
+
+            {% endif %}
+
+
+        </div>
+
+    </div>
+
+
+    {% empty %}
+
+    <div class="empty-message">
+
+        <h2>
+            📦 No Orders Yet
+        </h2>
+
+        <p>
+            You don't have any orders currently.
+        </p>
+
+        <br>
+
+        <a href="/buyer/"
+           class="btn primary">
+
+            🛒 Explore Marketplace
+
+        </a>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="logo">
+        🌾 AgriDirect AI
+    </div>
+
+    <p>
+        AI-powered digital marketplace connecting
+        farmers directly with buyers.
+    </p>
+
+    <p class="copyright">
+        © 2026 AgriDirect AI | Smart Agriculture Platform
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

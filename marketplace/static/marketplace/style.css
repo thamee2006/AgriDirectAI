@@ -1,0 +1,809 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f8f1;
+    color: #222;
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 7%;
+    background: white;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    margin-left: 25px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #2e7d32;
+}
+
+
+/* =========================
+   HOME HERO
+========================= */
+
+.hero {
+    min-height: 650px;
+    display: flex;
+    align-items: center;
+    padding: 90px 10%;
+    background: linear-gradient(
+        135deg,
+        #e8f5e9,
+        #f1f8e9,
+        #ffffff
+    );
+}
+
+.hero-content {
+    max-width: 780px;
+}
+
+.hero-badge {
+    display: inline-block;
+    padding: 10px 18px;
+    margin-bottom: 20px;
+    border-radius: 30px;
+    background: #dff1df;
+    color: #2e7d32;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.hero h1 {
+    font-size: 58px;
+    line-height: 1.12;
+    margin-bottom: 24px;
+    color: #1b5e20;
+}
+
+.hero h1 span {
+    color: #43a047;
+}
+
+.hero p {
+    font-size: 19px;
+    line-height: 1.8;
+    color: #555;
+    max-width: 700px;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.buttons {
+    margin-top: 30px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 13px 24px;
+    margin: 6px;
+    border-radius: 9px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.primary {
+    background: #2e7d32;
+    color: white;
+}
+
+.primary:hover {
+    background: #1b5e20;
+    transform: translateY(-2px);
+}
+
+.secondary {
+    background: white;
+    color: #2e7d32;
+    border: 2px solid #2e7d32;
+}
+
+.secondary:hover {
+    background: #2e7d32;
+    color: white;
+}
+
+
+/* =========================
+   HERO STATS
+========================= */
+
+.hero-stats {
+    display: flex;
+    gap: 50px;
+    margin-top: 45px;
+}
+
+.hero-stats div {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-stats strong {
+    font-size: 22px;
+    color: #1b5e20;
+}
+
+.hero-stats small {
+    margin-top: 5px;
+    color: #666;
+}
+
+
+/* =========================
+   ABOUT
+========================= */
+
+.about {
+    padding: 70px 10%;
+    background: white;
+    text-align: center;
+}
+
+.about-content {
+    max-width: 850px;
+    margin: auto;
+}
+
+.about h2 {
+    font-size: 34px;
+    color: #1b5e20;
+    margin-bottom: 20px;
+}
+
+.about p {
+    font-size: 17px;
+    line-height: 1.8;
+    color: #666;
+}
+
+
+/* =========================
+   FEATURES
+========================= */
+
+.features {
+    padding: 80px 8%;
+    text-align: center;
+}
+
+.features h2 {
+    font-size: 36px;
+    margin-bottom: 12px;
+    color: #1b5e20;
+}
+
+.section-subtitle {
+    color: #666;
+    font-size: 17px;
+    margin-bottom: 40px;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    margin-top: 35px;
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.card {
+    background: white;
+    padding: 30px 22px;
+    border-radius: 18px;
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.08);
+    transition: 0.3s;
+    border: 1px solid #edf2ea;
+}
+
+.card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 12px 30px rgba(46, 125, 50, 0.15);
+}
+
+.card h3 {
+    margin: 15px 0 12px;
+    color: #2e7d32;
+}
+
+.card h2 {
+    color: #1b5e20;
+    margin: 12px 0;
+}
+
+.card p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+.icon {
+    font-size: 45px;
+    margin-bottom: 10px;
+}
+
+
+/* =========================
+   HOW IT WORKS
+========================= */
+
+.how-it-works {
+    padding: 80px 8%;
+    background: #ffffff;
+    text-align: center;
+}
+
+.how-it-works h2 {
+    font-size: 36px;
+    color: #1b5e20;
+    margin-bottom: 45px;
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.step {
+    padding: 25px;
+    background: #f4f8f1;
+    border-radius: 16px;
+    border: 1px solid #e4eee1;
+}
+
+.step-number {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2e7d32;
+    margin-bottom: 15px;
+}
+
+.step h3 {
+    color: #2e7d32;
+    margin-bottom: 12px;
+}
+
+.step p {
+    color: #666;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   CTA
+========================= */
+
+.cta {
+    padding: 80px 8%;
+    text-align: center;
+    background: linear-gradient(
+        135deg,
+        #1b5e20,
+        #2e7d32
+    );
+    color: white;
+}
+
+.cta h2 {
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.cta p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.cta .primary {
+    background: white;
+    color: #2e7d32;
+}
+
+.cta .secondary {
+    background: transparent;
+    color: white;
+    border-color: white;
+}
+
+
+/* ==================================================
+   FARMER DASHBOARD
+================================================== */
+
+
+/* Dashboard Header */
+
+.dashboard-header {
+    padding: 65px 8%;
+    background: linear-gradient(
+        135deg,
+        #e8f5e9,
+        #f1f8e9
+    );
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+}
+
+.dashboard-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #dff1df;
+    color: #2e7d32;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.dashboard-header h1 {
+    font-size: 42px;
+    color: #1b5e20;
+    margin-bottom: 12px;
+}
+
+.dashboard-header p {
+    max-width: 650px;
+    color: #666;
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+
+/* Dashboard Stats */
+
+.dashboard-stats {
+    padding: 35px 8%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    background: white;
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 22px;
+    background: #f8fbf6;
+    border: 1px solid #e4eee1;
+    border-radius: 15px;
+    transition: 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+}
+
+.stat-icon {
+    font-size: 35px;
+}
+
+.stat-card h3 {
+    font-size: 24px;
+    color: #1b5e20;
+}
+
+.stat-card p {
+    color: #666;
+    margin-top: 4px;
+}
+
+
+/* Dashboard Section */
+
+.dashboard-section {
+    padding: 65px 8%;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.section-heading h2 {
+    color: #1b5e20;
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.section-heading p {
+    color: #666;
+}
+
+
+/* Dashboard Cards */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.dashboard-card {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    border: 1px solid #e5eee2;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+    transition: 0.3s;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(46, 125, 50, 0.14);
+}
+
+.dashboard-icon {
+    font-size: 42px;
+    margin-bottom: 15px;
+}
+
+.dashboard-card h3 {
+    color: #2e7d32;
+    font-size: 21px;
+    margin-bottom: 10px;
+}
+
+.dashboard-card p {
+    color: #666;
+    line-height: 1.6;
+    min-height: 70px;
+}
+
+
+/* My Crops */
+
+.my-crops {
+    padding: 65px 8%;
+    background: #f8fbf6;
+}
+
+.crop-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.crop-card {
+    background: white;
+    padding: 25px;
+    border-radius: 17px;
+    border: 1px solid #e4eee1;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+    transition: 0.3s;
+}
+
+.crop-card:hover {
+    transform: translateY(-5px);
+}
+
+.crop-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.crop-icon {
+    font-size: 38px;
+}
+
+.crop-status {
+    padding: 6px 12px;
+    background: #e8f5e9;
+    color: #2e7d32;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.crop-card h3 {
+    color: #1b5e20;
+    font-size: 23px;
+    margin: 18px 0;
+}
+
+.crop-details p {
+    margin: 10px 0;
+    color: #666;
+}
+
+.crop-description {
+    margin-top: 18px;
+    padding: 12px;
+    background: #f4f8f1;
+    border-radius: 9px;
+    color: #666;
+    font-size: 14px;
+}
+
+
+/* Empty Crops */
+
+.empty-crops {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 18px;
+}
+
+.empty-icon {
+    font-size: 55px;
+    margin-bottom: 15px;
+}
+
+.empty-crops h3 {
+    color: #1b5e20;
+    margin-bottom: 10px;
+}
+
+.empty-crops p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+
+/* Farmer Tip */
+
+.farmer-tip {
+    margin: 0 8% 60px;
+    padding: 25px 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: #e8f5e9;
+    border-left: 5px solid #2e7d32;
+    border-radius: 12px;
+}
+
+.tip-icon {
+    font-size: 35px;
+}
+
+.farmer-tip h3 {
+    color: #1b5e20;
+    margin-bottom: 6px;
+}
+
+.farmer-tip p {
+    color: #555;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   FORMS
+========================= */
+
+input,
+textarea,
+select {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #2e7d32;
+    box-shadow: 0 0 5px rgba(46, 125, 50, 0.2);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    padding: 40px 8%;
+    text-align: center;
+    background: #123d16;
+    color: white;
+}
+
+footer .logo {
+    color: white;
+    margin-bottom: 12px;
+}
+
+footer p {
+    color: #d7e6d8;
+    margin: 8px 0;
+    line-height: 1.6;
+}
+
+.copyright {
+    font-size: 14px;
+    margin-top: 20px !important;
+}
+
+
+/* =========================
+   HR
+========================= */
+
+hr {
+    border: none;
+    border-top: 1px solid #e5e5e5;
+    margin: 18px 0;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1000px) {
+
+    .feature-grid,
+    .steps {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard-grid,
+    .crop-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero h1 {
+        font-size: 45px;
+    }
+
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    nav {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    nav a {
+        margin: 5px 7px;
+        font-size: 14px;
+    }
+
+    .hero {
+        padding: 60px 7%;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 35px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .hero-stats {
+        justify-content: center;
+        gap: 25px;
+    }
+
+    .features {
+        padding: 55px 6%;
+    }
+
+    .features h2,
+    .how-it-works h2,
+    .cta h2 {
+        font-size: 28px;
+    }
+
+    .feature-grid,
+    .steps {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-header {
+        padding: 50px 7%;
+    }
+
+    .dashboard-header h1 {
+        font-size: 32px;
+    }
+
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+        padding: 25px 7%;
+    }
+
+    .dashboard-section,
+    .my-crops {
+        padding: 50px 7%;
+    }
+
+    .section-heading {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .dashboard-grid,
+    .crop-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .farmer-tip {
+        margin: 0 7% 40px;
+    }
+
+    .btn {
+        padding: 12px 18px;
+    }
+}

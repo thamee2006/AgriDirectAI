@@ -1,0 +1,222 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Payment - AgriDirect AI</title>
+
+    <link rel="stylesheet"
+          href="{% static 'marketplace/style.css' %}">
+
+    <style>
+
+        .payment-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .payment-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.10);
+            text-align: center;
+        }
+
+        .payment-card h1 {
+            margin-bottom: 10px;
+        }
+
+        .payment-card p {
+            color: #666;
+        }
+
+        .order-summary {
+            background: #f5f8f5;
+            padding: 18px;
+            border-radius: 12px;
+            margin: 25px 0;
+            text-align: left;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+        }
+
+        .qr-box {
+            margin: 20px auto;
+            padding: 15px;
+            width: 230px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .qr-box img {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+        }
+
+        .scan-text {
+            font-weight: 600;
+            margin-top: 15px;
+        }
+
+        .upi-id {
+            background: #eef6ee;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+
+        .pay-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: #2e7d32;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .pay-btn:hover {
+            background: #1b5e20;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <nav>
+
+        <div class="logo">
+            🌾 AgriDirect AI
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">Home</a>
+            <a href="/buyer/">Marketplace</a>
+            <a href="/orders/">My Orders</a>
+            <a href="/logout/">Logout</a>
+
+        </div>
+
+    </nav>
+
+
+    <div class="payment-container">
+
+        <div class="payment-card">
+
+            <h1>💳 Secure Payment</h1>
+
+            <p>
+                Complete your payment using UPI
+            </p>
+
+
+            <div class="order-summary">
+
+                <div class="summary-row">
+
+                    <strong>Crop</strong>
+
+                    <span>
+                        {{ order.crop.crop_name }}
+                    </span>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <strong>Quantity</strong>
+
+                    <span>
+                        {{ order.quantity }} kg
+                    </span>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <strong>Total Amount</strong>
+
+                    <strong>
+                        ₹{{ order.total_price }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <h3>
+                📱 Scan & Pay
+            </h3>
+
+
+            <div class="qr-box">
+
+                <img
+                    src="{% static 'marketplace/images/payment-qr.png' %}"
+                    alt="UPI QR Code">
+
+            </div>
+
+
+            <p class="scan-text">
+                Scan this QR code using any UPI app
+            </p>
+
+
+            <div class="upi-id">
+                UPI ID: agriDirect@upi
+            </div>
+
+
+            <a
+                href="/orders/"
+                class="pay-btn">
+
+                ✅ Payment Completed
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <footer>
+
+        <p>
+            🌾 AgriDirect AI |
+            Smart Agricultural Marketplace
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

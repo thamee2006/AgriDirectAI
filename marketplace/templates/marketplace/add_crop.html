@@ -1,0 +1,347 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Add Crop - AgriDirect AI</title>
+
+    <link rel="stylesheet"
+          href="{% static 'marketplace/style.css' %}">
+
+    <style>
+
+        .add-header {
+            text-align: center;
+            padding: 45px 20px 25px;
+        }
+
+        .add-header h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .add-header p {
+            color: #666;
+            font-size: 17px;
+        }
+
+        .add-container {
+            width: 90%;
+            max-width: 650px;
+            margin: 20px auto 60px;
+        }
+
+        .add-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            border: 1px solid #e8eee8;
+        }
+
+        .success-message {
+            background: #e8f7ed;
+            color: #21863d;
+            padding: 14px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .add-card label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        .add-card input,
+        .add-card select,
+        .add-card textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px;
+            margin-bottom: 18px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+
+        .add-card textarea {
+            height: 110px;
+            resize: vertical;
+        }
+
+        .add-card button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: #21863d;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .add-card button:hover {
+            opacity: 0.9;
+        }
+
+        .crop-note {
+            background: #f2f8f3;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            color: #555;
+            font-size: 14px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <div class="logo">
+        🌾 AgriDirect AI
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+
+        <a href="/farmer/">Farmer</a>
+
+        <a href="/buyer/">Buyer</a>
+
+        <a href="/orders/">My Orders</a>
+
+        <a href="/logout/">Logout</a>
+
+    </div>
+
+</nav>
+
+
+<!-- HEADER -->
+
+<section class="add-header">
+
+    <h1>
+        🌱 Add Your Crop
+    </h1>
+
+    <p>
+        Enter your crop details to connect
+        with potential buyers.
+    </p>
+
+</section>
+
+
+<div class="add-container">
+
+
+    {% if success %}
+
+        <div class="success-message">
+
+            ✅ {{ success }}
+
+        </div>
+
+    {% endif %}
+
+
+    <div class="add-card">
+
+
+        <div class="crop-note">
+
+            🌾 Select a crop from the list.
+            The corresponding crop image will
+            automatically appear across the platform.
+
+        </div>
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            <!-- FARMER NAME -->
+
+            <label>
+                👨‍🌾 Farmer Name
+            </label>
+
+            <input
+                type="text"
+                name="farmer_name"
+                placeholder="Enter Farmer Name"
+                required>
+
+
+            <!-- CROP NAME -->
+
+            <label>
+                🌱 Crop Name
+            </label>
+
+            <select name="crop_name" required>
+
+                <option value="">
+                    -- Select Crop --
+                </option>
+
+                <option value="Tomato">
+                    🍅 Tomato
+                </option>
+
+                <option value="Onion">
+                    🧅 Onion
+                </option>
+
+                <option value="Carrot">
+                    🥕 Carrot
+                </option>
+
+                <option value="Beetroot">
+                    Beetroot
+                </option>
+
+                <option value="Cabbage">
+                    🥬 Cabbage
+                </option>
+
+                <option value="Cauliflower">
+                    Cauliflower
+                </option>
+
+                <option value="Corn">
+                    🌽 Corn
+                </option>
+
+                <option value="Drumstick">
+                    Drumstick
+                </option>
+
+                <option value="Lady Finger">
+                    Lady Finger
+                </option>
+
+                <option value="Potato">
+                    🥔 Potato
+                </option>
+
+            </select>
+
+
+            <!-- QUANTITY -->
+
+            <label>
+                📦 Quantity (kg)
+            </label>
+
+            <input
+                type="number"
+                name="quantity"
+                placeholder="Enter Quantity in kg"
+                min="1"
+                step="0.01"
+                required>
+
+
+            <!-- PRICE -->
+
+            <label>
+                💰 Price per kg
+            </label>
+
+            <input
+                type="number"
+                name="price"
+                placeholder="Enter Price per kg"
+                min="1"
+                step="0.01"
+                required>
+
+
+            <!-- LOCATION -->
+
+            <label>
+                📍 Location
+            </label>
+
+            <input
+                type="text"
+                name="location"
+                placeholder="Enter Location"
+                required>
+
+
+            <!-- DESCRIPTION -->
+
+            <label>
+                📝 Crop Description
+            </label>
+
+            <textarea
+                name="description"
+                placeholder="Enter crop description"></textarea>
+
+
+            <!-- SUBMIT -->
+
+            <button type="submit">
+
+                🌱 Add Crop
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="logo">
+        🌾 AgriDirect AI
+    </div>
+
+    <p>
+        AI-powered digital marketplace connecting
+        farmers directly with buyers.
+    </p>
+
+    <p class="copyright">
+        © 2026 AgriDirect AI | Smart Agriculture Platform
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

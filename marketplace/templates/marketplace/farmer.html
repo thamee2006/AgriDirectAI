@@ -1,0 +1,264 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Farmer Dashboard - AgriDirect AI</title>
+
+    <link rel="stylesheet"
+          href="{% static 'marketplace/style.css' %}">
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+
+    <nav>
+
+        <div class="logo">
+            🌾 AgriDirect AI
+        </div>
+
+        <div>
+            <a href="/">Home</a>
+            <a href="/farmer/">Farmer</a>
+            <a href="/buyer/">Buyer</a>
+
+            {% if user.is_authenticated %}
+                <a href="/logout/">Logout</a>
+            {% endif %}
+        </div>
+
+    </nav>
+
+
+    <!-- Farmer Dashboard -->
+
+    <section class="features">
+
+        <h2>👨‍🌾 Farmer Dashboard</h2>
+
+        <p>
+            Manage your crops, monitor market trends
+            and connect directly with buyers.
+        </p>
+
+
+        <div class="feature-grid">
+
+
+            <!-- Add Crop -->
+
+            <div class="card">
+
+                <div class="icon">🌱</div>
+
+                <h3>Add Your Crop</h3>
+
+                <p>
+                    Add crop name, quantity, price,
+                    location and description.
+                </p>
+
+                <a href="/add-crop/"
+                   class="btn primary">
+                    ➕ Add Crop
+                </a>
+
+            </div>
+
+
+            <!-- Fair Price -->
+
+            <div class="card">
+
+                <div class="icon">💰</div>
+
+                <h3>AI Fair Price</h3>
+
+                <p>
+                    Get an AI-based recommended
+                    selling price for your crops.
+                </p>
+
+                <a href="/fair-price/"
+                   class="btn primary">
+                    💰 Check Price
+                </a>
+
+            </div>
+
+
+            <!-- Demand Forecast -->
+
+            <div class="card">
+
+                <div class="icon">📈</div>
+
+                <h3>Demand Forecast</h3>
+
+                <p>
+                    Analyze expected crop demand
+                    and plan your production.
+                </p>
+
+                <a href="/demand-forecast/"
+                   class="btn primary">
+                    📈 View Forecast
+                </a>
+
+            </div>
+
+
+            <!-- My Orders -->
+
+            <div class="card">
+
+                <div class="icon">📦</div>
+
+                <h3>My Orders</h3>
+
+                <p>
+                    View and track orders received
+                    from buyers.
+                </p>
+
+                <a href="/orders/"
+                   class="btn primary">
+                    📦 View Orders
+                </a>
+
+            </div>
+
+
+            <!-- Smart Matching -->
+
+            <div class="card">
+
+                <div class="icon">🤝</div>
+
+                <h3>Smart Matching</h3>
+
+                <p>
+                    Find suitable buyers and connect
+                    directly without unnecessary intermediaries.
+                </p>
+
+                <a href="/smart-matching/"
+                   class="btn primary">
+                    🤝 Find Buyers
+                </a>
+
+            </div>
+
+
+            <!-- Smart Logistics -->
+
+            <div class="card">
+
+                <div class="icon">🚚</div>
+
+                <h3>Smart Logistics</h3>
+
+                <p>
+                    View estimated delivery distance
+                    and transportation time.
+                </p>
+
+                <a href="/logistics/"
+                   class="btn primary">
+                    🚚 View Logistics
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ========================= -->
+        <!-- MY CROPS -->
+        <!-- ========================= -->
+
+        <section class="features">
+
+            <h2>🌾 My Crops</h2>
+
+            <p>
+                Crops added by you are displayed here.
+            </p>
+
+
+            <div class="feature-grid">
+
+                {% for crop in crops %}
+
+                <div class="card">
+
+                    <div class="icon">🌱</div>
+
+                    <h3>{{ crop.crop_name }}</h3>
+
+                    <p>
+                        👨‍🌾 Farmer: {{ crop.farmer_name }}
+                    </p>
+
+                    <p>
+                        📦 Quantity: {{ crop.quantity }} kg
+                    </p>
+
+                    <p>
+                        💰 Price: ₹{{ crop.price }}/kg
+                    </p>
+
+                    <p>
+                        📍 Location: {{ crop.location }}
+                    </p>
+
+                    {% if crop.description %}
+                    <p>
+                        📝 {{ crop.description }}
+                    </p>
+                    {% endif %}
+
+                </div>
+
+                {% empty %}
+
+                <div class="card">
+
+                    <div class="icon">🌱</div>
+
+                    <h3>No Crops Added Yet</h3>
+
+                    <p>
+                        Add your first crop to see it here.
+                    </p>
+
+                    <a href="/add-crop/"
+                       class="btn primary">
+                        ➕ Add Crop
+                    </a>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+
+    </section>
+
+</body>
+
+</html>

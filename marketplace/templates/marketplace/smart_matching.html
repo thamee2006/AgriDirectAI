@@ -1,0 +1,354 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Matching - AgriDirect AI</title>
+
+    <link rel="stylesheet"
+          href="{% static 'marketplace/style.css' %}">
+
+    <style>
+
+        .matching-header {
+            text-align: center;
+            padding: 45px 20px 25px;
+        }
+
+        .matching-header h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .matching-header p {
+            color: #666;
+            font-size: 17px;
+        }
+
+        .search-box {
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto 40px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+
+        .search-box button {
+            padding: 14px 22px;
+            border: none;
+            border-radius: 10px;
+            background: #21863d;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .matching-grid {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto auto 60px;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .matching-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+
+            border: 1px solid #e8eee8;
+
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+
+            transition: 0.3s;
+        }
+
+        .matching-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+
+        .crop-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .matching-content {
+            padding: 22px;
+        }
+
+        .matching-content h2 {
+            margin-top: 0;
+            font-size: 25px;
+        }
+
+        .matching-content p {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .score-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 12px;
+            background: #eef8f0;
+            text-align: center;
+        }
+
+        .score-box h3 {
+            margin: 0 0 8px;
+        }
+
+        .score {
+            font-size: 30px;
+            font-weight: bold;
+            color: #21863d;
+        }
+
+        .buy-button {
+            display: block;
+            text-align: center;
+            margin-top: 18px;
+        }
+
+        .empty-message {
+            text-align: center;
+            width: 100%;
+            padding: 40px;
+        }
+
+        @media (max-width: 900px) {
+
+            .matching-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .matching-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .matching-header h1 {
+                font-size: 30px;
+            }
+
+            .search-box {
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <div class="logo">
+        🌾 AgriDirect AI
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+
+        <a href="/farmer/">Farmer</a>
+
+        <a href="/buyer/">Buyer</a>
+
+        <a href="/orders/">My Orders</a>
+
+        <a href="/logout/">Logout</a>
+
+    </div>
+
+</nav>
+
+
+<!-- HEADER -->
+
+<section class="matching-header">
+
+    <h1>
+        🤝 Smart Farmer-Buyer Matching
+    </h1>
+
+    <p>
+        Find the best crops and farmers based on
+        availability, quantity, price and location.
+    </p>
+
+</section>
+
+
+<!-- SEARCH -->
+
+<form method="GET" class="search-box">
+
+    <input
+        type="text"
+        name="crop"
+        value="{{ search_crop }}"
+        placeholder="Search crop e.g. Tomato, Corn, Potato">
+
+    <button type="submit">
+        🔍 Search
+    </button>
+
+</form>
+
+
+<!-- MATCHING RESULTS -->
+
+<div class="matching-grid">
+
+    {% for crop in crops %}
+
+    <div class="matching-card">
+
+
+        <!-- CROP IMAGE -->
+
+        <img
+            src="{% static 'marketplace/images/' %}{{ crop.image_filename }}"
+            alt="{{ crop.crop_name }}"
+            class="crop-image">
+
+
+        <!-- CROP DETAILS -->
+
+        <div class="matching-content">
+
+            <h2>
+                🌱 {{ crop.crop_name }}
+            </h2>
+
+            <p>
+                👨‍🌾 <strong>Farmer:</strong>
+                {{ crop.farmer_name }}
+            </p>
+
+            <p>
+                📦 <strong>Available:</strong>
+                {{ crop.quantity }} kg
+            </p>
+
+            <p>
+                💰 <strong>Price:</strong>
+                ₹{{ crop.price }}/kg
+            </p>
+
+            <p>
+                📍 <strong>Location:</strong>
+                {{ crop.location }}
+            </p>
+
+
+            <!-- AI MATCH SCORE -->
+
+            <div class="score-box">
+
+                <h3>
+                    🤖 AI Match Score
+                </h3>
+
+                <div class="score">
+                    {{ crop.match_score }}%
+                </div>
+
+                <p>
+                    Suitable farmer-buyer match
+                </p>
+
+            </div>
+
+
+            <!-- BUY BUTTON -->
+
+            <div class="buy-button">
+
+                <a
+                    href="/buy/{{ crop.id }}/"
+                    class="btn primary">
+
+                    🛒 Buy Crop
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    {% empty %}
+
+    <div class="empty-message">
+
+        <h3>
+            🌱 No Matching Crops Found
+        </h3>
+
+        <p>
+            Try searching for another crop.
+        </p>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="logo">
+        🌾 AgriDirect AI
+    </div>
+
+    <p>
+        AI-powered digital marketplace connecting
+        farmers directly with buyers.
+    </p>
+
+    <p class="copyright">
+        © 2026 AgriDirect AI | Smart Agriculture Platform
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>
